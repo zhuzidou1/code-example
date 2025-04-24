@@ -63,26 +63,15 @@ s invoke
 调用函数时收到的响应如下所示：
 
 ```bash
-========= FC invoke Logs begin =========
-FC Initialize Start RequestId: 5a3a8a36-f774-4708-86b2-xxxxxxxx
-load code for handler:index.initialize
-2022-04-03T03:47:36.352Z 5a3a8a36-f774-4708-86b2-xxxxxxxx [verbose] initializing
-FC Initialize End RequestId: 5a3a8a36-f774-4708-86b2-xxxxxxxx
-FC Invoke Start RequestId: 5a3a8a36-f774-4708-86b2-xxxxxxxx
-load code for handler:index.handler
-2022-04-03T03:47:36.517Z 5a3a8a36-f774-4708-86b2-xxxxxxxx [verbose] --------------------------SELECT----------------------------
-2022-04-03T03:47:36.518Z 5a3a8a36-f774-4708-86b2-xxxxxxxx [verbose] [ RowDataPacket { id: 1, name: '张三', age: 18 } ]
-2022-04-03T03:47:36.518Z 5a3a8a36-f774-4708-86b2-xxxxxxxx [verbose] ------------------------------------------------------------
-FC Invoke End RequestId: 5a3a8a36-f774-4708-86b2-xxxxxxxx
+2025-04-24 14:15:24FC Invoke Start RequestId: 1-6809d6fc-******
+2025-04-24 14:15:242025-04-24 06:15:24.086 1-6809d6fc-****** [info] --------------------------SELECT----------------------------
+2025-04-24 14:15:242025-04-24 06:15:24.088 1-6809d6fc-****** [info] [ RowDataPacket { id: 1, name: '张三', age: 18 } ]
+2025-04-24 14:15:242025-04-24 06:15:24.089 1-6809d6fc-****** [info] ------------------------------------------------------------
 
-Duration: 16.81 ms, Billed Duration: 17 ms, Memory Size: 128 MB, Max Memory Used: 52.32 MB
-========= FC invoke Logs end =========
-
-FC Invoke Result:
-[{"id":1,"name":"张三","age":18}]
-
-
-End of method: invoke
+2025-04-24 14:15:24FC Invoke End RequestId: 1-6809d6fc-******
+2025-04-24 14:21:16FC PreStop Start RequestId: e63c7c4d-******
+2025-04-24 14:21:162025-04-24 06:21:16.643 e63c7c4d-****** [info] pre_stop start
+2025-04-24 14:21:16FC PreStop End RequestId: e63c7c4d-******
 ```
 
 ### 方式二、使用控制台创建
