@@ -1,0 +1,49 @@
+# ------------------------------------
+#   If you want to use this file directly, please add [-t/--template] parameter, for example [s deploy -t s_en.yaml]
+# ------------------------------------
+#   Welcome to use Alibaba Cloud Function Compute FC components for project development
+#   Component warehouse address: https://github.com/devsapp/fc
+#   Component help documentation: https://www.serverless-devs.com/fc/readme
+#   Yaml reference documentation: https://www.serverless-devs.com/fc/yaml/readme
+#   About:
+#     - The relationship between Serverless Devs and FC components, how to declare/deploy multiple functions, how to deploy code packages over 50M
+#     - About the usage of .fcignore, what the .s directory in the tool does, and how to process the build product after the function performs the build operation
+#   and other issues, you can refer to the documentation: https://www.serverless-devs.com/fc/tips
+#   For questions about how to do CICD, please refer to: https://www.serverless-devs.com/serverless-devs/cicd
+#   For issues such as how to divide the environment, please refer to: https://www.serverless-devs.com/serverless-devs/extend
+#   For more function calculation cases, please refer to: https://github.com/devsapp/awesome/blob/main/README_en.md
+#   If you have any questions, please come to the DingTalk group and ask: 33947367
+# ------------------------------------
+edition: 3.0.0
+name: hello-world-app
+# access is the key information configuration required by the current application:
+# Key configuration can refer to: https://www.serverless-devs.com/serverless-devs/command/config
+# For the order of key usage, please refer to: https://www.serverless-devs.com/serverless-devs/tool#Key usage order and specification
+access: "{{ access }}"
+
+vars: # global variables
+  region: cn-hangzhou
+
+resources:
+  fc-example: # business name/module name
+    component: fc3
+    functionName: nodejs20-mysql
+    runtime: nodejs20
+    description: 'hello world by serverless devs'
+    timeout: 60
+    memorySize: 128
+    code: ./code
+    handler: index.handler
+    environmentVariables:
+      MYSQL_USER: xxx
+      MYSQL_PASSWORD: xxx
+      MYSQL_ENDPOINT: xxx
+      MYSQL_PORT: '3306'
+      MYSQL_DBNAME: xxx
+    instanceLifecycleConfig:
+      preStop:
+        handler: index.preStop
+        timeout: 20
+      initializer:
+        handler: index.initialize
+        timeout: 20

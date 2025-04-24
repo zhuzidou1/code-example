@@ -14,7 +14,7 @@
 #   更多函数计算案例，可参考：https://github.com/devsapp/awesome/
 #   有问题快来钉钉群问一下吧：33947367
 # ------------------------------------
-edition: 1.0.0
+edition: 3.0.0
 name: hello-world-app
 # access 是当前应用所需要的密钥信息配置：
 # 密钥配置可以参考：https://www.serverless-devs.com/serverless-devs/command/config
@@ -23,34 +23,29 @@ access: default # 配置密钥信息
 
 vars: # 全局变量
   region: cn-hangzhou
-  service:
-    name: fc-example
-    description: 'hello world by serverless devs'
 
-services:
+resources:
   fc-example:
-    component: fc
+    component: fc3
     props:
-      region: ${vars.region} 
-      service: ${vars.service}
-      function:
-        name: nodejs14-mysql
-        description: 'hello world by serverless devs'
-        runtime: nodejs12
-        codeUri: ./code
-        handler: index.handler
-        memorySize: 128
-        timeout: 60
-        environmentVariables:
-          MYSQL_USER: "xxx"       # 设置mysql数据库配置
-          MYSQL_PASSWORD: "xxx"   # 设置mysql数据库配置
-          MYSQL_ENDPOINT: "xxx"   # 设置mysql数据库配置
-          MYSQL_PORT:  "3306"     # 设置mysql数据库配置
-          MYSQL_DBNAME: "xxx"     # 设置mysql数据库配置
-        initializationTimeout: 20
-        initializer: index.initialize
-        instanceLifecycleConfig:
-          preStop:
-            handler: index.pre_stop
-            timeout: 10
-        
+      region: ${vars.region}
+      functionName: nodejs20-mysql
+      runtime: nodejs20
+      description: 'hello world by serverless devs'
+      timeout: 60
+      memorySize: 128
+      code: ./code
+      handler: index.handler
+      environmentVariables:
+        MYSQL_USER: xxx       # 实例中创建的账号名称
+        MYSQL_PASSWORD: xxx   # 数据库密码
+        MYSQL_ENDPOINT: xxx   # 数据库接入点
+        MYSQL_PORT: '3306'    # 数据库端口
+        MYSQL_DBNAME: xxx     #实例中创建的数据库名称
+      instanceLifecycleConfig:
+        preStop:
+          handler: index.preStop
+          timeout: 20
+        initializer:
+          handler: index.initialize
+          timeout: 20

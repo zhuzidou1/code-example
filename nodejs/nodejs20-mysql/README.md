@@ -1,4 +1,4 @@
-# nodejs14 runtime 的 mysql 示例
+# nodejs20 runtime 的 mysql 示例
 本示例为您展示了 Nodejs runtime 的 mysql 使用示例。
 在本示例中，mysql数据库配置在函数的环境变量配置中（参考s.yaml)，initializer 回调函数从环境变量中获取数据库配置，创建 mysql 连接，preStop 回调函数负责关闭 mysql 连接。
 
@@ -20,7 +20,7 @@ INSERT INTO `users` (`id`, `name`, `age`) VALUES
 (2, '李四', 28);
 ```
 
-- [可选] 安装并配置 Serverless Devs 工具，以及 docker daemon。（https://help.aliyun.com/document_detail/195474.html）
+- [可选] 安装并配置 Serverless Devs 工具，以及 docker daemon。（https://help.aliyun.com/document_detail/2513712.html）
 
 ## 快速开始
 ### 方式一、使用 Serverless Devs 工具编译部署
@@ -35,7 +35,7 @@ INSERT INTO `users` (`id`, `name`, `age`) VALUES
         initializer: index.initialize
         instanceLifecycleConfig:
           preStop:
-            handler: index.pre_stop
+            handler: index.preStop
             timeout: 20
 ```
 
@@ -93,7 +93,7 @@ End of method: invoke
 # 安装依赖到 /code 目录
 cd code && npm install
 # 打包文件
-cd code && zip -r nodejs14-mysql.zip *
+cd code && zip -r nodejs20-mysql.zip *
 ```
 
 创建函数并上传代码包
@@ -101,13 +101,13 @@ cd code && zip -r nodejs14-mysql.zip *
 #### 2. 设置initializer/preStop回调函数配置和环境变量配置
 
 回调函数配置
-![img_1.png](assets/20220331110743.jpg)
+![img_1.png](assets/20250424100830.jpg)
 
 环境变量配置
 ![img_2.png](assets/20220331111048.jpg)
 
 #### 3. 调用测试
-![img_3.png](assets/20220403123120.jpg)
+![img_3.png](assets/20250424143042.jpg)
 
 ## 数据库访问限制
 当使用云数据库时，一般都会有访问控制，比如阿里云数据库RDS中的白名单设置（ [RDS白名单设置说明](https://help.aliyun.com/document_detail/43185.html?spm=5176.19908528.help.dexternal.6c721450iLu0jH) )。
@@ -117,9 +117,9 @@ cd code && zip -r nodejs14-mysql.zip *
 在生产环境，可以使用以下两种方式访问：
 
 1. VPC方式（**推荐**） <br>
-参考文档：https://help.aliyun.com/document_detail/84514.html
+参考文档：https://help.aliyun.com/document_detail/2513584.html
 2. 代理方式<br>
-参考文档：https://help.aliyun.com/document_detail/91243.html
+参考文档：https://help.aliyun.com/document_detail/2513538.html
 
 ## 备注
 1. 本示例不是连接池方式，若要使用连接池，可以参考文档 [nodejs mysql pooling connections](https://github.com/mysqljs/mysql#pooling-connections)
